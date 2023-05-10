@@ -17,8 +17,6 @@ module.exports = {
     'vue',
   ],
   rules: {
-  },
-  settings: {
-    'import/extensions': ['.js', '.vue', 'css'],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };
