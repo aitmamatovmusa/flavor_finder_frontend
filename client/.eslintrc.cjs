@@ -18,4 +18,7 @@ module.exports = {
   ],
   rules: {
   },
+  settings: {
+    'import/extensions': ['.js', '.vue', 'css'],
+  },
 };
