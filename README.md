@@ -27,6 +27,7 @@ pip install -r requirements.txt
 ```
 FLASK_APP=app.py
 FLASK_ENV=development  # or production
+SQLALCHEMY_DATABASE_URI=postgresql://<username>:<password>@<host>/<database>
 ```
 
 6. Run the Flask server.
