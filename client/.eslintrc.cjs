@@ -24,7 +24,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: [
-        ['@', path.resolve(__driname, 'src')],
+        ['@', path.resolve(__dirname, 'src')],
       ],
     },
   },
