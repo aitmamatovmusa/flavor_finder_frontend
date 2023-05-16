@@ -2,11 +2,11 @@ import os
 from flask import Flask,Session
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
-from account import account # import the account blueprint object
 from models import db 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import text
 
+# Blueprints
+from account import account 
 
 load_dotenv()
 

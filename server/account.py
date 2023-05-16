@@ -1,8 +1,8 @@
-from flask import Blueprint, request, session, redirect ,jsonify
+from flask import Blueprint, request, session ,jsonify
 from flask_bcrypt import Bcrypt
 from models import db, User
-# create a blueprint object named account
-account = Blueprint("account", __name__)
+
+account = Blueprint("account", __name__) # create a blueprint object named account
 
 bcrypt = Bcrypt()
 
