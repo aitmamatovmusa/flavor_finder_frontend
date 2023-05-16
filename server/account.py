@@ -1,5 +1,5 @@
 from flask import Blueprint, request, session, redirect ,jsonify
-from flask_bcrypt import Bycrypt
+from flask_bcrypt import Bcrypt
 from models import db, User
 # create a blueprint object named account
 account = Blueprint("account", __name__)
@@ -18,7 +18,7 @@ def register():
         if user_exists:
             return jsonify({"Error": "Already exists"}) ,409
     
-        hashed_password = bycrypt.generate_password_hash(password)
+        hashed_password = bcrypt.generate_password_hash(password)
         new_user = User(email=email,password=hashed_password,username=username)
         
         db.session.add(new_user)
@@ -31,12 +31,31 @@ def register():
         "email": new_user.email
     })
     
-        
-
+    
 @account.route("/login",methods=["POST","GET"])
 def login():
     if request.method == "POST":
-        user = request.form["login_form"]
-        session["user"] = user
+        email = request.json["email"]
+        password = request.json["password"]
+
+        user = User.query.filter_by(email=email).first()
+
+        if user is None:
+            return jsonify({"error": "Unauthorized"}), 401
+
+        if not bcrypt.check_password_hash(user.password, password):
+            return jsonify({"error": "Unauthorized"}), 401
     
-    return redirect("/") 
+        session["user_id"] = user.id
+
+        return jsonify({
+            "id": user.id,
+            "email": user.email
+        })
+
+
+@account.route("/logout", methods=["POST"])
+def logout_user():
+    session.pop("user_id")
+    return "200"
+

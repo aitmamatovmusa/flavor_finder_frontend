@@ -1,7 +1,7 @@
 import os
-from flask import Flask
+from flask import Flask,Session
 from dotenv import load_dotenv
-from flask_bcrypt import Bycrypt
+from flask_bcrypt import Bcrypt
 from account import account # import the account blueprint object
 from models import db 
 from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 db.init_app(app)
 db.create_all()
-
+bcrypt = Bcrypt(app)
 server_session = Session(app)
 
 
