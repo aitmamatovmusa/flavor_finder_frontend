@@ -1,18 +1,21 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
-from account import account # import the account blueprint object
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import text
 
+from models import db
+
+# Blueprints
+from account import account
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
-db = SQLAlchemy(app)
+db.init_app(app)
 
-# register the blueprints with the app object
+with app.app_context():
+    db.create_all()
+
 app.register_blueprint(account)
 
 @app.route("/")
