@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    Hello App
+    <RouterView></RouterView>
   </div>
 </template>
 
