@@ -8,6 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 # Blueprints
 from account import account 
 
+from models import db
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -17,6 +19,10 @@ db.init_app(app)
 db.create_all()
 bcrypt = Bcrypt(app)
 server_session = Session(app)
+
+
+with app.app_context():
+    db.create_all()
 
 
 app.register_blueprint(account)
