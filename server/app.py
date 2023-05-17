@@ -19,7 +19,6 @@ bcrypt = Bcrypt(app)
 server_session = Session(app)
 
 
-# register the blueprints with the app object
 app.register_blueprint(account)
 
 @app.route("/")

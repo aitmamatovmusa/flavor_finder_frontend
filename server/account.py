@@ -2,11 +2,9 @@ from flask import Blueprint, request, session ,jsonify
 from flask_bcrypt import Bcrypt
 from models import db, User
 
-account = Blueprint("account", __name__) # create a blueprint object named account
-
+account = Blueprint("account", __name__) 
 bcrypt = Bcrypt()
 
-# define routes for the blueprint
 @account.route("/register",methods=["POST","GET"])
 def register():
     if request.method == "POST":
