@@ -14,7 +14,7 @@
             <div class="card-info-item">
               Rating:
               <span>
-                <el-icon v-for="star in 5" :key="star"><Star/></el-icon>
+                <el-rate disabled v-model="rating" size="small" disabled-void-color="#000000"/>
               </span>
             </div>
             <div class="card-info-item">
@@ -39,7 +39,9 @@
 </template>
 
 <script setup>
-import { Star } from '@element-plus/icons-vue';
+import { ref } from 'vue';
+
+const rating = ref(3);
 </script>
 
 <style scoped>
