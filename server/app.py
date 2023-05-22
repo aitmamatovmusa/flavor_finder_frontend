@@ -2,7 +2,6 @@ import os
 from flask import Flask
 from flask_session import Session
 from flask_bcrypt import Bcrypt
-from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from models import db
 
