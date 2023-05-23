@@ -19,7 +19,9 @@ module.exports = {
     'vue',
   ],
   rules: {
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': 'off',
+    'vue/multi-word-component-names': 'off',
+    'no-unused-vars': 'warn',
   },
   settings: {
     'import/resolver': {
