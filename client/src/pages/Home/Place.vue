@@ -4,7 +4,7 @@
       :shadow="'never'"
       :body-style="{ background: '#E4E7ED', padding: '10px' }"
     >
-      <h5 class="card-name">Cafe name</h5>
+      <h5 class="card-name">{{ title }}</h5>
 
       <div class="card-info">
         <div class="card-info-item">
@@ -12,7 +12,7 @@
           <span>
             <el-rate
               disabled
-              v-model="rating"
+              :model-value="rating"
               size="small"
               disabled-void-color="#000000"
             />
@@ -20,11 +20,11 @@
         </div>
         <div class="card-info-item">
           Address:
-          <span> 123 Main Street </span>
+          <span> {{ address }} </span>
         </div>
         <div class="card-info-item">
           Reviews:
-          <span> 38 </span>
+          <span> {{ numReviews }} </span>
         </div>
       </div>
 
@@ -36,9 +36,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-const rating = ref(3);
+defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: false,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  numReviews: {
+    type: Number,
+    required: true,
+  },
+});
 </script>
 
 <style scoped>

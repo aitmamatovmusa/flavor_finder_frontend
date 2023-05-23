@@ -1,7 +1,12 @@
 <template>
   <div>
     <el-row :gutter="10">
-      <Place v-for="col in 6" :key="col"/>
+      <Place
+        :rating="5"
+        :numReviews="38"
+        title="Cafe name"
+        address="123 Main Street"
+      />
     </el-row>
   </div>
 </template>
