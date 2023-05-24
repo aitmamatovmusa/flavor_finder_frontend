@@ -23,6 +23,12 @@ npm install
 yarn install
 ```
 
+Set the environment variables. Create a `.env` file in the project root directory and add the following:
+
+```
+VITE_API_BASE_URL=http://localhost:5000
+```
+
 ### Dev and Build
 
 If you want to start development, use the following command

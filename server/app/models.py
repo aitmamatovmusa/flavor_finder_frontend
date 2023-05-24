@@ -1,7 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey, CheckConstraint
-
-db = SQLAlchemy()
+from app import db
 
 class User(db.Model):
     __tablename__ = "users"
@@ -9,7 +7,6 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False) 
     email = db.Column(db.String(120), unique=True, nullable=False) 
     password = db.Column(db.String(60), nullable=False) 
-
 
 class Place(db.Model):
     __tablename__ = 'places'

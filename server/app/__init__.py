@@ -1,21 +1,24 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask
 from flask_session import Session
 from flask_bcrypt import Bcrypt
-from dotenv import load_dotenv
-from models import db
-
-# Blueprints
-from account import account 
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from app.views.index import index_views
 
 load_dotenv()
 
 bcrypt = Bcrypt()
 session = Session()
-app = Flask(__name__)
+db = SQLAlchemy()
 
 def create_app():
+    from app.account import account
+    
+    app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+    CORS(app, support_credentials=True)
 
     db.init_app(app)
     bcrypt.init_app(app)
@@ -26,11 +29,9 @@ def create_app():
 
     app.register_blueprint(account)
 
-    return app
+    index_views(app)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+    return app
 
 if __name__ == "__main__":
     app = create_app()
