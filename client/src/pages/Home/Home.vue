@@ -2,10 +2,12 @@
   <div>
     <el-row :gutter="10">
       <Place
-        :rating="5"
-        :numReviews="38"
-        title="Cafe name"
-        address="123 Main Street"
+        v-for="place in places"
+        :key="place.title"
+        :rating="place.rating"
+        :numReviews="place.num_reviews"
+        :title="place.name"
+        :address="place.address"
       />
     </el-row>
   </div>
@@ -13,11 +15,14 @@
 
 <script setup>
 import Place from '@/pages/Home/Place.vue';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import instance from '@/services/api';
 
+const places = ref([]);
+
 async function getPlaces() {
-  const result = await instance.get('/api/places');
+  const { data } = await instance.get('/api/places');
+  places.value = data;
 }
 
 onMounted(() => getPlaces());
