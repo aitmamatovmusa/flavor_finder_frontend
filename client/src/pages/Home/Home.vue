@@ -13,4 +13,13 @@
 
 <script setup>
 import Place from '@/pages/Home/Place.vue';
+import { onMounted } from 'vue';
+import instance from '@/services/api';
+
+async function getPlaces() {
+  const result = await instance.get('/api/places');
+}
+
+onMounted(() => getPlaces());
+
 </script>
