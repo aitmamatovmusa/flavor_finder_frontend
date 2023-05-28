@@ -10,6 +10,7 @@
         :address="place.address"
       />
     </el-row>
+    <NewPlace />
   </div>
 </template>
 
@@ -17,6 +18,7 @@
 import Place from '@/pages/Home/Place.vue';
 import { onMounted, ref } from 'vue';
 import instance from '@/services/api';
+import NewPlace from '@/pages/Home/NewPlace.vue';
 
 const places = ref([]);
 
