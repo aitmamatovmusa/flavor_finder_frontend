@@ -10,7 +10,7 @@
         :address="place.address"
       />
     </el-row>
-    <NewPlace />
+    <NewPlace :places="places" />
   </div>
 </template>
 
