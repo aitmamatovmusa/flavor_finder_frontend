@@ -3,15 +3,17 @@
     >Add a new place</el-button
   >
   <el-dialog v-model="dialogFormVisible" title="Place">
-    <el-form ref="placeFormRef" :model="form" :rules="rules">
+    <el-form ref="placeFormRef" :model="form" method="post" :rules="rules">
       <el-form-item label="Place" :label-width="formLabelWidth" prop="place">
         <el-input
+          name="place"
           v-model="form.place"
           placeholder="Please write a place"
         />
       </el-form-item>
       <el-form-item label="Address" :label-width="formLabelWidth" prop="address">
         <el-input
+          name="address"
           v-model="form.address"
           placeholder="Please select an address"
         />
@@ -30,6 +32,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import instance from '@/services/api';
 
 const formLabelWidth = '140px';
 
@@ -50,9 +53,16 @@ const rules = reactive({
 
 async function submitForm(formEl) {
   if (!formEl) return;
-  await formEl.validate((valid) => {
+  await formEl.validate(async (valid) => {
     if (valid) {
-      dialogFormVisible.value = false;
+      try {
+        await instance.post('add-new-place', {
+          name: form.place,
+          address: form.address,
+        });
+      } finally {
+        dialogFormVisible.value = false;
+      }
     }
   });
 }
