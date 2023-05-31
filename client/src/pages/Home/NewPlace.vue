@@ -8,14 +8,28 @@
         <el-input
           name="place"
           v-model="form.place"
-          placeholder="Please write a place"
+          placeholder="Please enter the place"
         />
       </el-form-item>
       <el-form-item label="Address" :label-width="formLabelWidth" prop="address">
         <el-input
           name="address"
           v-model="form.address"
-          placeholder="Please select an address"
+          placeholder="Please enter the address"
+        />
+      </el-form-item>
+      <el-form-item label="Average price" :label-width="formLabelWidth" prop="average_price">
+        <el-input
+          name="average_price"
+          v-model.number="form.average_price"
+          placeholder="Please enter the average price"
+        />
+      </el-form-item>
+      <el-form-item label="Map link" :label-width="formLabelWidth" prop="map_link">
+        <el-input
+          name="map_link"
+          v-model="form.map_link"
+          placeholder="Please enter the map link"
         />
       </el-form-item>
     </el-form>
@@ -41,13 +55,22 @@ const dialogFormVisible = ref(false);
 const form = reactive({
   place: '',
   address: '',
+  average_price: '',
+  map_link: '',
 });
 const rules = reactive({
   place: [
-    { required: true, message: 'Please select a place', trigger: 'change' },
+    { required: true, message: 'Please enter the place', trigger: 'change' },
   ],
   address: [
-    { required: true, message: 'Please select an address', trigger: 'change' },
+    { required: true, message: 'Please enter the address', trigger: 'change' },
+  ],
+  average_price: [
+    { required: true, message: 'Please enter the average price' },
+    { type: 'number', message: 'The average price must be a number' },
+  ],
+  map_link: [
+    { required: true, message: 'Please enter the map link', trigger: 'change' },
   ],
 });
 
@@ -59,6 +82,8 @@ async function submitForm(formEl) {
         await instance.post('add-new-place', {
           name: form.place,
           address: form.address,
+          average_price: form.average_price,
+          map_link: form.map_link,
         });
       } finally {
         dialogFormVisible.value = false;
