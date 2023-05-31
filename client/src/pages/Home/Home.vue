@@ -10,21 +10,25 @@
         :address="place.address"
       />
     </el-row>
+    <NewPlace />
   </div>
 </template>
 
 <script setup>
-import Place from '@/pages/Home/Place.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, provide } from 'vue';
 import instance from '@/services/api';
+import Place from '@/pages/Home/Place.vue';
+import NewPlace from '@/pages/Home/NewPlace.vue';
 
 const places = ref([]);
 
-async function getPlaces() {
+async function fetchPlaces() {
   const { data } = await instance.get('/api/places');
   places.value = data;
 }
 
-onMounted(() => getPlaces());
+provide('fetchPlaces', fetchPlaces);
+
+onMounted(() => fetchPlaces());
 
 </script>
