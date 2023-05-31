@@ -45,9 +45,10 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, inject } from 'vue';
 import instance from '@/services/api';
 
+const fetchPlaces = inject('fetchPlaces');
 const formLabelWidth = '140px';
 
 const placeFormRef = ref();
@@ -90,7 +91,9 @@ async function submitForm(formEl) {
           average_price: form.average_price,
           map_link: form.map_link,
         });
+
         resetForm(formEl);
+        fetchPlaces();
       } finally {
         dialogFormVisible.value = false;
       }
