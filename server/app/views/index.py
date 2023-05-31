@@ -41,20 +41,18 @@ def index_views(app):
                 return jsonify(error="Missing required fields"), 400
             
             is_place_exist = Place.query.filter_by(name=name).first()
-            if not is_place_exist:
-                new_place = Place(
-                    name=name,
-                    address=address, 
-                    num_reviews=0,
-                    average_price=average_price,
-                    map_link=map_link
-                )
-
-                db.session.add(new_place)
-                db.session.commit()
-
-                return jsonify("The place has been successfully created"), 200
-            else:
+            if is_place_exist:
                 return jsonify(error="The place already exists"), 400
+                
+            new_place = Place(
+                name=name,
+                address=address, 
+                num_reviews=0,
+                average_price=average_price,
+                map_link=map_link
+            )
+
+            db.session.add(new_place)
+            db.session.commit()
             
-        return []
+        return jsonify("The place has been successfully created"), 200
