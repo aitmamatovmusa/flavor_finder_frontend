@@ -5,6 +5,7 @@ from flask_session import Session
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from app.views.index import index_views
 
 load_dotenv()
@@ -18,6 +19,7 @@ def create_app():
     
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+    migrate = Migrate(app, db)
     CORS(app, support_credentials=True)
 
     db.init_app(app)
