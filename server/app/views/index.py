@@ -33,13 +33,22 @@ def index_views(app):
 
             name = new_place["name"]
             address = new_place["address"]
+            average_price = new_place["average_price"]
+            map_link = new_place["map_link"]
+            form_validation = any(field is None or field == '' for field in [name, address, average_price, map_link])
 
-            if not name or not address:
+            if form_validation:
                 return jsonify(error="Missing required fields"), 400
             
             is_place_exist = Place.query.filter_by(name=name).first()
             if not is_place_exist:
-                new_place = Place(name=name, address=address)
+                new_place = Place(
+                    name=name,
+                    address=address, 
+                    num_reviews=0,
+                    average_price=average_price,
+                    map_link=map_link
+                )
 
                 db.session.add(new_place)
                 db.session.commit()
