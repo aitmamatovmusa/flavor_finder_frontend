@@ -74,6 +74,11 @@ const rules = reactive({
   ],
 });
 
+function resetForm(formEl) {
+  if (!formEl) return;
+  formEl.resetFields();
+}
+
 async function submitForm(formEl) {
   if (!formEl) return;
   await formEl.validate(async (valid) => {
@@ -85,6 +90,7 @@ async function submitForm(formEl) {
           average_price: form.average_price,
           map_link: form.map_link,
         });
+        resetForm(formEl);
       } finally {
         dialogFormVisible.value = false;
       }
