@@ -13,6 +13,7 @@ def index_views(app):
         for place in raw_places:
             places.append(
                 {
+                    "id": place.id,
                     "name": place.name,
                     "address": place.address,
                     "rating": place.rating,
