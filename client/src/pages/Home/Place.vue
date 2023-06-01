@@ -27,10 +27,9 @@
           <span> {{ place.num_reviews }} </span>
         </div>
       </div>
-
-      <el-button size="large" color="#000000" class="card-btn"
-        >Watch More</el-button
-      >
+      <router-link class="card-link" :to="`place/${place.id}`" target="_blank">
+        Watch More
+      </router-link>
     </el-card>
   </el-col>
 </template>
@@ -89,8 +88,14 @@ defineProps({
   color: #000000;
 }
 
-.card-btn {
-  width: 100%;
+.card-link {
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #000;
 }
 
 @media (max-width: 576px) {
