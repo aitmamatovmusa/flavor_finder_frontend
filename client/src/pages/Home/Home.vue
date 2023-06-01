@@ -3,11 +3,8 @@
     <el-row :gutter="10">
       <Place
         v-for="place in places"
-        :key="place.title"
-        :rating="place.rating"
-        :numReviews="place.num_reviews"
-        :title="place.name"
-        :address="place.address"
+        :key="place.id"
+        :place="place"
       />
     </el-row>
     <NewPlace />
