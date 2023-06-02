@@ -18,6 +18,7 @@
       </div>
     </div>
   </div>
+  <NewComment />
 </template>
 
 <script setup>
@@ -25,6 +26,7 @@ import {
   defineProps, watch, toRefs, ref,
 } from 'vue';
 import instance from '@/services/api';
+import NewComment from '@/pages/DetailPlace/NewComment.vue';
 
 const props = defineProps({
   placeId: {
