@@ -60,7 +60,6 @@ defineProps({
   }
   &__name {
     margin-bottom: 50px;
-    font-size: 25px;
   }
   &__item {
     display: flex;
