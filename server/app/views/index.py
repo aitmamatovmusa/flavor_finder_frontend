@@ -23,6 +23,24 @@ def index_views(app):
                 }
             )
         return jsonify(places)
+    
+    @app.route("/api/place/<id>")
+    @cross_origin(supports_credentials=True)
+    def place(id):
+        place = Place.query.filter_by(id=id).first()
+
+        if place:
+            return jsonify({
+                "id": place.id,
+                "name": place.name,
+                "address": place.address,
+                "rating": place.rating,
+                "num_reviews": place.num_reviews,
+                "average_price": place.average_price,
+                "map_link": place.map_link,
+            })
+            
+        return {}
 
     @app.route("/add-new-place", methods=["POST"])
     def add_new_place():
