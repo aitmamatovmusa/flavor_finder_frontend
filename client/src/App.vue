@@ -11,7 +11,7 @@ const searchValue = ref('');
       <el-header :height="'auto'">
         <el-row :align="'middle'">
           <el-col :xs="24" :sm="12" :md="16">
-            <span class="header-logo">FoodSearch</span>
+            <router-link class="header-logo" to="/">Flavor Finder</router-link>
           </el-col>
           <el-col :xs="24" :sm="12" :md="8">
             <el-input
@@ -39,6 +39,8 @@ const searchValue = ref('');
 }
 
 .header-logo {
+  color: #000;
+  text-decoration: none;
   font-size: var(--el-font-size-extra-large);
 }
 
