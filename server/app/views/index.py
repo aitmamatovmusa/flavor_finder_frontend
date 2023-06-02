@@ -2,7 +2,7 @@ from flask_cors import cross_origin
 from flask import jsonify, request
 
 def index_views(app):
-    from app.models import Place
+    from app.models import Place, Comment
     from app import db
 
     @app.route("/api/places")
@@ -13,6 +13,7 @@ def index_views(app):
         for place in raw_places:
             places.append(
                 {
+                    "id": place.id,
                     "name": place.name,
                     "address": place.address,
                     "rating": place.rating,
@@ -22,6 +23,24 @@ def index_views(app):
                 }
             )
         return jsonify(places)
+    
+    @app.route("/api/place/<id>")
+    @cross_origin(supports_credentials=True)
+    def place(id):
+        place = Place.query.filter_by(id=id).first()
+
+        if place:
+            return jsonify({
+                "id": place.id,
+                "name": place.name,
+                "address": place.address,
+                "rating": place.rating,
+                "num_reviews": place.num_reviews,
+                "average_price": place.average_price,
+                "map_link": place.map_link,
+            })
+            
+        return {}
 
     @app.route("/add-new-place", methods=["POST"])
     def add_new_place():
@@ -56,3 +75,19 @@ def index_views(app):
             db.session.commit()
             
         return jsonify("The place has been successfully created"), 200
+
+    @app.route("/api/comments/<place_id>")
+    @cross_origin(supports_credentials=True)
+    def comments(place_id):
+        raw_comments = Comment.query.filter_by(place_id=place_id).all()
+        comments = []
+
+        for comment in raw_comments:
+            comments.append({
+                'id': comment.id,
+                'user_name': comment.user_name,
+                'review': comment.review,
+                'rating': comment.rating,
+            })
+
+        return comments

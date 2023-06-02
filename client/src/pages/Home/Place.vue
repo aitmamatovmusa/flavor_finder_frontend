@@ -4,7 +4,7 @@
       :shadow="'never'"
       :body-style="{ background: '#E4E7ED', padding: '10px' }"
     >
-      <h5 class="card-name">{{ title }}</h5>
+      <h5 class="card-name">{{ place.name }}</h5>
 
       <div class="card-info">
         <div class="card-info-item">
@@ -12,7 +12,7 @@
           <span>
             <el-rate
               disabled
-              :model-value="rating"
+              :model-value="place.rating"
               size="small"
               disabled-void-color="#000000"
             />
@@ -20,41 +20,24 @@
         </div>
         <div class="card-info-item">
           Address:
-          <span> {{ address }} </span>
+          <span> {{ place.address }} </span>
         </div>
         <div class="card-info-item">
           Reviews:
-          <span> {{ numReviews }} </span>
+          <span> {{ place.num_reviews }} </span>
         </div>
       </div>
-
-      <el-button size="large" color="#000000" class="card-btn"
-        >Watch More</el-button
-      >
+      <router-link class="card-link" :to="`place/${place.id}`" target="_blank">
+        Watch More
+      </router-link>
     </el-card>
   </el-col>
 </template>
 
 <script setup>
 defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: false,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  numReviews: {
-    type: Number,
+  place: {
+    type: Object,
     required: true,
   },
 });
@@ -105,8 +88,14 @@ defineProps({
   color: #000000;
 }
 
-.card-btn {
-  width: 100%;
+.card-link {
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #000;
 }
 
 @media (max-width: 576px) {
