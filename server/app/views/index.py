@@ -84,7 +84,8 @@ def index_views(app):
 
         for comment in raw_comments:
             comments.append({
-                'name': comment.user_name,
+                'id': comment.id,
+                'user_name': comment.user_name,
                 'review': comment.review,
                 'rating': comment.rating,
             })
