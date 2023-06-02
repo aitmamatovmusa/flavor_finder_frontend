@@ -1,7 +1,7 @@
 <template>
-  <el-button text @click="dialogFormVisible = true" type="primary"
-    >Add a new place</el-button
-  >
+  <el-button click="dialogFormVisible = true" type="primary">
+    Add a new place
+  </el-button>
   <el-dialog v-model="dialogFormVisible" title="Place">
     <el-form ref="placeFormRef" :model="form" method="post" :rules="rules">
       <el-form-item label="Place" :label-width="formLabelWidth" prop="place">
@@ -11,21 +11,33 @@
           placeholder="Please enter the place"
         />
       </el-form-item>
-      <el-form-item label="Address" :label-width="formLabelWidth" prop="address">
+      <el-form-item
+        label="Address"
+        :label-width="formLabelWidth"
+        prop="address"
+      >
         <el-input
           name="address"
           v-model="form.address"
           placeholder="Please enter the address"
         />
       </el-form-item>
-      <el-form-item label="Average price" :label-width="formLabelWidth" prop="average_price">
+      <el-form-item
+        label="Average price"
+        :label-width="formLabelWidth"
+        prop="average_price"
+      >
         <el-input
           name="average_price"
           v-model.number="form.average_price"
           placeholder="Please enter the average price"
         />
       </el-form-item>
-      <el-form-item label="Map link" :label-width="formLabelWidth" prop="map_link">
+      <el-form-item
+        label="Map link"
+        :label-width="formLabelWidth"
+        prop="map_link"
+      >
         <el-input
           name="map_link"
           v-model="form.map_link"
@@ -36,9 +48,7 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="cancelNewPlace">Cancel</el-button>
-        <el-button type="primary" @click="confirmNewPlace">
-          Confirm
-        </el-button>
+        <el-button type="primary" @click="confirmNewPlace"> Confirm </el-button>
       </span>
     </template>
   </el-dialog>
@@ -108,7 +118,6 @@ function confirmNewPlace() {
 function cancelNewPlace() {
   dialogFormVisible.value = false;
 }
-
 </script>
 
 <style scoped>
