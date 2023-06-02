@@ -5,27 +5,25 @@
     <div class="place__description">
       <div class="place__info">
         <div class="place__item">
-          Rating:
-          <span>
-            <el-rate
-              disabled
-              :model-value="place.rating"
-              size="small"
-              disabled-void-color="#000000"
-            />
-          </span>
+          <span class="place__item-text">Rating:</span>
+          <el-rate
+            disabled
+            :model-value="place.rating"
+            size="small"
+            disabled-void-color="#000000"
+          />
         </div>
         <div class="place__item">
-          Address:
-          <span> {{ place.address }} </span>
+          <span class="place__item-text">Address:</span>
+          <span class="place__item-value"> {{ place.address }} </span>
         </div>
         <div class="place__item">
-          Reviews:
-          <span> {{ place.num_reviews }} </span>
+          <span class="place__item-text">Reviews:</span>
+          <span class="place__item-value"> {{ place.num_reviews }} </span>
         </div>
         <div class="place__item">
-          Average Check:
-          <span> {{ place.average_price }} </span>
+          <span class="place__item-text">Average Check:</span>
+          <span class="place__item-value"> {{ place.average_price }} </span>
         </div>
       </div>
       <el-link
@@ -54,13 +52,27 @@ defineProps({
 <style scoped lang="scss">
 .place {
   &__description {
-    height: 70vh;
+    min-height: 63vh;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   &__name {
-    font-size: var(--el-font-size-extra-large);
+    margin-bottom: 50px;
+    font-size: 25px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+    &-text {
+      color: #00000056;
+    }
+    &-value {
+      color: #00000091;
+    }
   }
   &__link {
     display: block;
@@ -69,13 +81,13 @@ defineProps({
     padding: 20px;
     color: white;
     background: rgb(246, 102, 7);
-    transition: .2s;
+    transition: 0.2s;
 
     &:hover {
-        opacity: .8;
+      opacity: 0.8;
     }
     &:after {
-        display: none;
+      display: none;
     }
   }
 }
