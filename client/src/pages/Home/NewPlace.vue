@@ -1,5 +1,5 @@
 <template>
-  <el-button click="dialogFormVisible = true" type="primary">
+  <el-button @click="dialogFormVisible = true" type="primary">
     Add a new place
   </el-button>
   <el-dialog v-model="dialogFormVisible" title="Place">
