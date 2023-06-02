@@ -4,7 +4,7 @@
       <Place :place="place" />
     </div>
     <div class="grid-content">
-      <Reviews :place-id="place.id" :num-reviews="place.num_reviews"/>
+      <Reviews :place="place"/>
     </div>
   </div>
 </template>

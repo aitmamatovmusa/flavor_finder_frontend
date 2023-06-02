@@ -1,6 +1,6 @@
 <template>
   <div class="reviews">
-    <h2 class="reviews__title">{{ numReviews }} Reviews</h2>
+    <h2 class="reviews__title">{{ place.num_reviews }} Reviews</h2>
     <div class="reviews__wrapper">
       <div class="comment" v-for="comment in comments" :key="comment.id">
         <p class="comment__text">
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <NewComment />
+  <NewComment :place="place" />
 </template>
 
 <script setup>
@@ -29,17 +29,13 @@ import instance from '@/services/api';
 import NewComment from '@/pages/DetailPlace/NewComment.vue';
 
 const props = defineProps({
-  placeId: {
-    type: Number,
-    required: true,
-  },
-  numReviews: {
-    type: Number,
+  place: {
+    type: Object,
     required: true,
   },
 });
 
-const { placeId } = toRefs(props);
+const { place } = toRefs(props);
 const comments = ref([]);
 
 async function fetchComments(id) {
@@ -47,8 +43,8 @@ async function fetchComments(id) {
   comments.value = data;
 }
 
-watch(placeId, async () => {
-  fetchComments(placeId.value);
+watch(place.value.placeId, async () => {
+  fetchComments(place.value.placeId);
 });
 </script>
 
