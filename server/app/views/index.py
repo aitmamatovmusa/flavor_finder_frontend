@@ -1,5 +1,9 @@
 from flask_cors import cross_origin
 from flask import jsonify, request
+from sqlalchemy import func
+
+def has_any_empty_fields(fields):
+    return any(field is None or field == '' for field in fields)
 
 def index_views(app):
     from app.models import Place, Comment
@@ -54,9 +58,9 @@ def index_views(app):
             address = new_place["address"]
             average_price = new_place["average_price"]
             map_link = new_place["map_link"]
-            form_validation = any(field is None or field == '' for field in [name, address, average_price, map_link])
+            is_any_empty_fields = has_any_empty_fields([name, address, average_price, map_link])
 
-            if form_validation:
+            if is_any_empty_fields:
                 return jsonify(error="Missing required fields"), 400
             
             is_place_exist = Place.query.filter_by(name=name).first()
@@ -91,3 +95,42 @@ def index_views(app):
             })
 
         return comments
+
+    @app.route("/add-new-comment", methods=["POST"])
+    def add_new_comment():
+        if request.method == "POST":
+            new_comment = request.get_json()
+
+            if not new_comment:
+                return jsonify(error="Invalid json"), 400
+            
+            user_name = new_comment['user_name']
+            review = new_comment['review']
+            rating = new_comment['rating']
+            address = new_comment['address']
+            place_id = new_comment['place_id']
+
+            is_any_empty_fields = has_any_empty_fields([user_name, review, rating, address, place_id])
+
+            if (is_any_empty_fields):
+                return jsonify(error="Missing required fields"), 400
+            
+            place = Place.query.filter_by(id=place_id).first()
+
+            if not place:
+                return jsonify(error="Invalid place"), 400
+            
+            new_comment = Comment(user_name=user_name, review=review, rating=rating, address=address, place_id=place_id)
+
+            db.session.add(new_comment)
+
+            comments_count = Comment.query.filter_by(place_id=place_id).count()
+            comments_rating = Comment.query.with_entities(func.avg(Comment.rating).label('average')).filter_by(place_id=place_id).one().average
+            rounded_comments_rating = round(comments_rating)
+
+            place.rating = rounded_comments_rating
+            place.num_reviews = comments_count
+
+            db.session.commit()
+
+        return jsonify("The comment has been successfully created"), 200
