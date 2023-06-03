@@ -56,9 +56,11 @@
 
 <script setup>
 import {
-  ref, reactive, defineProps, toRefs,
+  ref, reactive, defineProps, toRefs, inject,
 } from 'vue';
 import instance from '@/services/api';
+
+const fetchPlace = inject('fetchPlace');
 
 const props = defineProps({
   place: {
@@ -112,6 +114,9 @@ async function submitForm(formEl) {
           place_id: place.value.id,
         };
 
+        await instance.post('add-new-comment', reviewDetails);
+
+        fetchPlace(place.value.id);
         resetForm(formEl);
       } finally {
         dialogFormVisible.value = false;

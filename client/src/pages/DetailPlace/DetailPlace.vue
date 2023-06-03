@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, provide } from 'vue';
 import { useRoute } from 'vue-router';
 import instance from '@/services/api';
 import Place from '@/pages/DetailPlace/Place.vue';
@@ -23,6 +23,8 @@ async function fetchPlace(id) {
   const { data } = await instance.get(`/api/place/${id}`);
   place.value = data;
 }
+
+provide('fetchPlace', fetchPlace);
 
 onMounted(() => {
   const placeId = route.params?.id;

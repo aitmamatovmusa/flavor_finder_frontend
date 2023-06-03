@@ -43,8 +43,8 @@ async function fetchComments(id) {
   comments.value = data;
 }
 
-watch(place.value.placeId, async () => {
-  fetchComments(place.value.placeId);
+watch(place, async () => {
+  fetchComments(place.value.id);
 });
 </script>
 
