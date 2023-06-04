@@ -1,10 +1,3 @@
-<script setup>
-import { Search } from '@element-plus/icons-vue';
-import { ref } from 'vue';
-
-const searchValue = ref('');
-</script>
-
 <template>
   <div class="wrapper">
     <el-container>
@@ -13,13 +6,7 @@ const searchValue = ref('');
           <el-col :xs="24" :sm="12" :md="16">
             <router-link class="header-logo" to="/">Flavor Finder</router-link>
           </el-col>
-          <el-col :xs="24" :sm="12" :md="8">
-            <el-input
-              v-model="searchValue"
-              size="large" :prefix-icon="Search"
-              placeholder="Search..."
-            />
-          </el-col>
+          <Search />
         </el-row>
       </el-header>
       <el-main>
@@ -28,6 +15,10 @@ const searchValue = ref('');
     </el-container>
   </div>
 </template>
+
+<script setup>
+import Search from '@/components/Search.vue';
+</script>
 
 <style scoped>
 .wrapper {
