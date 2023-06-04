@@ -12,11 +12,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref, provide } from 'vue';
+import {
+  watch, onMounted, ref, provide,
+} from 'vue';
 import instance from '@/services/api';
 import Place from '@/pages/Home/Place.vue';
 import NewPlace from '@/pages/Home/NewPlace.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const places = ref([]);
 
 async function fetchPlaces() {
@@ -27,5 +31,7 @@ async function fetchPlaces() {
 provide('fetchPlaces', fetchPlaces);
 
 onMounted(() => fetchPlaces());
+
+watch(router.currentRoute, (searchValue) => {});
 
 </script>
