@@ -12,7 +12,8 @@ def index_views(app):
     @app.route("/api/places")
     @cross_origin(supports_credentials=True)
     def places():
-        raw_places = Place.query.all()
+        search_value = request.args.get('search')
+        raw_places = Place.query.filter(Place.name.ilike(f'%{search_value}%')).all() if search_value else Place.query.all()
         places = []
         for place in raw_places:
             places.append(
