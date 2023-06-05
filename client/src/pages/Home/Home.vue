@@ -31,13 +31,14 @@ async function fetchPlaces(searchQuery = '') {
 
 provide('fetchPlaces', fetchPlaces);
 
-onMounted(() => fetchPlaces());
+onMounted(() => {
+  const searchValue = router.currentRoute.value.query?.search;
+  fetchPlaces(searchValue);
+});
 
 watch(router.currentRoute, () => {
   const searchQuery = router.currentRoute.value.query?.search;
-  if (searchQuery) {
-    fetchPlaces(searchQuery);
-  }
+  fetchPlaces(searchQuery);
 });
 
 </script>

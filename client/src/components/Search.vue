@@ -17,9 +17,14 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const searchValue = ref('');
+const searchValue = ref();
 
 watch(searchValue, debounce(() => {
   router.push({ query: { search: searchValue.value } });
 }, 500));
+
+watch(router.currentRoute, () => {
+  const searchQuery = router.currentRoute.value.query?.search;
+  searchValue.value = searchQuery;
+});
 </script>
