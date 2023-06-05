@@ -12,20 +12,33 @@
 </template>
 
 <script setup>
-import { onMounted, ref, provide } from 'vue';
+import {
+  watch, onMounted, ref, provide,
+} from 'vue';
 import instance from '@/services/api';
 import Place from '@/pages/Home/Place.vue';
 import NewPlace from '@/pages/Home/NewPlace.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const places = ref([]);
 
-async function fetchPlaces() {
-  const { data } = await instance.get('/api/places');
+async function fetchPlaces(searchQuery = '') {
+  const url = `/api/places${searchQuery && `?search=${searchQuery}`}`;
+  const { data } = await instance.get(url);
   places.value = data;
 }
 
 provide('fetchPlaces', fetchPlaces);
 
-onMounted(() => fetchPlaces());
+onMounted(() => {
+  const searchValue = router.currentRoute.value.query?.search;
+  fetchPlaces(searchValue);
+});
+
+watch(router.currentRoute, () => {
+  const searchQuery = router.currentRoute.value.query?.search;
+  fetchPlaces(searchQuery);
+});
 
 </script>
