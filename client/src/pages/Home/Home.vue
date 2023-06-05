@@ -23,8 +23,9 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const places = ref([]);
 
-async function fetchPlaces() {
-  const { data } = await instance.get('/api/places');
+async function fetchPlaces(searchQuery = '') {
+  const url = `/api/places${searchQuery && `?search=${searchQuery}`}`;
+  const { data } = await instance.get(url);
   places.value = data;
 }
 
@@ -32,6 +33,11 @@ provide('fetchPlaces', fetchPlaces);
 
 onMounted(() => fetchPlaces());
 
-watch(router.currentRoute, (searchValue) => {});
+watch(router.currentRoute, () => {
+  const searchQuery = router.currentRoute.value.query?.search;
+  if (searchQuery) {
+    fetchPlaces(searchQuery);
+  }
+});
 
 </script>
