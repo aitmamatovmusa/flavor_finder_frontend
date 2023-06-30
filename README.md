@@ -3,7 +3,6 @@ Find your place to eat
 
 # Frontend Setup
 
-
 Clone the project
 
 ```bash
