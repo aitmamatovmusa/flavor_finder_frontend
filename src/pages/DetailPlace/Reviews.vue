@@ -39,8 +39,8 @@ const { place } = toRefs(props);
 const comments = ref([]);
 
 async function fetchComments(id) {
-  const { data } = await instance(`api/comments/${id}`);
-  comments.value = data;
+  const { data } = await instance(`api/comments?place=${id}`);
+  comments.value = data?.comments;
 }
 
 watch(place, async () => {

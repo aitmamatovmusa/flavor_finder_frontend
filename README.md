@@ -17,7 +17,7 @@ npm install
 Set the environment variables. Create a `.env` file in the project root directory and add the following:
 
 ```
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
 ### Dev and Build

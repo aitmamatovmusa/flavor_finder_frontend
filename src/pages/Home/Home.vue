@@ -26,7 +26,7 @@ const places = ref([]);
 async function fetchPlaces(searchQuery = '') {
   const url = `/api/places${searchQuery && `?search=${searchQuery}`}`;
   const { data } = await instance.get(url);
-  places.value = data;
+  places.value = data?.places;
 }
 
 provide('fetchPlaces', fetchPlaces);

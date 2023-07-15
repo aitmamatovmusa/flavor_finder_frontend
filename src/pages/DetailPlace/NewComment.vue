@@ -111,10 +111,10 @@ async function submitForm(formEl) {
           review: form.review,
           rating: form.rating,
           address: place.value.address,
-          place_id: place.value.id,
+          place: place.value.id,
         };
 
-        await instance.post('add-new-comment', reviewDetails);
+        await instance.post('api/comments/', reviewDetails);
 
         fetchPlace(place.value.id);
         resetForm(formEl);

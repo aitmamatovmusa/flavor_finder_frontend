@@ -95,7 +95,7 @@ async function submitForm(formEl) {
   await formEl.validate(async (valid) => {
     if (valid) {
       try {
-        await instance.post('add-new-place', {
+        await instance.post('api/places/', {
           name: form.place,
           address: form.address,
           average_price: form.average_price,

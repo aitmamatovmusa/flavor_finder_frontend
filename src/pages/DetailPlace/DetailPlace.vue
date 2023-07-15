@@ -20,7 +20,7 @@ const route = useRoute();
 
 const place = ref({});
 async function fetchPlace(id) {
-  const { data } = await instance.get(`/api/place/${id}`);
+  const { data } = await instance.get(`/api/places/${id}`);
   place.value = data;
 }
 
