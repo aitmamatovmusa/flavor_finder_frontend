@@ -80,9 +80,6 @@ const rules = reactive({
     { required: true, message: 'Please enter the average price' },
     { type: 'number', message: 'The average price must be a number' },
   ],
-  map_link: [
-    { required: true, message: 'Please enter the map link', trigger: 'change' },
-  ],
 });
 
 function resetForm(formEl) {
