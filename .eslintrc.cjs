@@ -1,33 +1,25 @@
-const path = require('path');
-
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
+  env: { browser: true, es2020: true, node: true },
   extends: [
-    'plugin:vue/vue3-essential',
-    'airbnb-base',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'airbnb',
+    'airbnb/hooks',
+    'airbnb-typescript',
+    'plugin:prettier/recommended',
   ],
-  overrides: [
-  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
-  plugins: [
-    'vue',
-  ],
+  plugins: ['react-refresh', 'prettier'],
   rules: {
+    'react-refresh/only-export-components': 'warn',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'vue/multi-word-component-names': 'off',
-    'no-unused-vars': 'warn',
-  },
-  settings: {
-    'import/resolver': {
-      alias: [
-        ['@', path.resolve(__dirname, 'src')],
-      ],
-    },
   },
 };

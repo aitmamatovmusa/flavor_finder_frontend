@@ -1,35 +1,49 @@
-# flavor_finder
-Find your place to eat
+# Flavor Finder Frontend
 
-# Frontend Setup
+
+### Get started
 
 Clone the project
 
 ```bash
-git clone https://github.com/aytmamatov/flavor_finder_frontend.git
+git clone https://github.com/HydroOx1d/react-boilerplate.git
 ```
-Install all dependencies using the command
+
+Install the dependencies
 
 ```bash
 npm install
+#or
+yarn install
 ```
-
-Set the environment variables. Create a `.env` file in the project root directory and add the following:
-
-```
-VITE_API_BASE_URL=http://127.0.0.1:8000
-```
-
-### Dev and Build
-
-If you want to start development, use the following command
+Start the project
 
 ```bash
 npm run dev
+#or
+yarn dev
 ```
 
-If you want to build the application, use the following command
+Build the project
 
 ```bash
 npm run build
+#of
+yarn build
+```
+
+Start tests
+
+```bash
+npm run test
+#or
+yarn test
+```
+
+Start linter
+
+```bash
+npm run lint
+#or
+yarn lint
 ```
