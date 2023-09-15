@@ -1,49 +1,47 @@
 # Flavor Finder Frontend
 
+Flavor Finder is a delightful project that helps users discover and choose great places to eat. Whether you're craving a cozy café or a top-notch restaurant, Flavor Finder has you covered.
 
-### Get started
+## Table of Contents
 
-Clone the project
+- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
 
-```bash
-git clone https://github.com/HydroOx1d/react-boilerplate.git
-```
+## Dependencies
 
-Install the dependencies
+### Production Dependencies
 
-```bash
-npm install
-#or
-yarn install
-```
-Start the project
+- **react**: A JavaScript library for building user interfaces.
+- **react-dom**: React package for working with the DOM.
+- **react-redux**: Official React bindings for Redux.
+- **react-router-dom**: DOM bindings for React Router.
 
-```bash
-npm run dev
-#or
-yarn dev
-```
+### Development Dependencies
 
-Build the project
+- **@testing-library/react**: Simple and complete React DOM testing utilities.
+- **@types/react**: TypeScript types for React.
+- **@types/react-dom**: TypeScript types for React DOM.
+- **typescript**: A superset of JavaScript that compiles to clean and simple JavaScript.
+- **vite**: A fast build tool that significantly improves the frontend development experience.
 
-```bash
-npm run build
-#of
-yarn build
-```
+## Getting Started
 
-Start tests
+Follow these steps to get started with Flavor Finder:
 
-```bash
-npm run test
-#or
-yarn test
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/aytmamatov/flavor_finder_frontend.git
+   cd flavor_finder_frontend
+   ```
 
-Start linter
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run lint
-#or
-yarn lint
-```
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+Enjoy exploring flavors with Flavor Finder! 🍔🍝🍰
