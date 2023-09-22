@@ -1,20 +1,17 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/header/Header';
+import { Route, Routes } from 'react-router-dom';
 import { paths } from './router';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
+import AppLayout from './layouts/AppLayout';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="flex flex-col overflow-hidden min-h-[100vh]">
-        <Header />
-        <Routes>
-          <Route path={paths.home} element={<Home />} />
-          <Route path={paths.signUp} element={<SignUp />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <Routes>
+      <Route path={paths.signUp} element={<SignUp />} />
+      <Route element={<AppLayout />}>
+        <Route path={paths.home} element={<Home />} />
+      </Route>
+    </Routes>
   );
 }
 
