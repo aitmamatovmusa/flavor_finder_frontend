@@ -1,14 +1,43 @@
 import { MouseEvent, ChangeEvent, useState } from 'react';
+import { httpClient } from '../api/client';
+
+interface UserForm {
+  username: string;
+  password: string;
+  email: string;
+}
 
 function SignUp() {
   const [signUpForm, setSignUpForm] = useState({
     username: '',
     password: '',
     repeatPassword: '',
+    email: '',
   });
 
-  function registerUser(e: MouseEvent<HTMLButtonElement>) {
+  async function registerUser(userForm: UserForm) {
+    try {
+      await httpClient.post('/register/', userForm);
+    } catch {
+      throw new Error('Registration error');
+    }
+  }
+
+  function checkUserForm(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+
+    const { username, password, repeatPassword, email } = signUpForm;
+    if (
+      username.trim() &&
+      password.trim() &&
+      repeatPassword.trim() &&
+      email.trim()
+    ) {
+      if (password === repeatPassword) {
+        const userForm = { username, password, email };
+        registerUser(userForm);
+      }
+    }
   }
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -33,6 +62,21 @@ function SignUp() {
               name="username"
               className="font-normal border rounded py-2 px-3 w-full focus:outline-none focus:shadow-outline mt-1"
               placeholder="Enter your username"
+            />
+          </label>
+
+          <label
+            htmlFor="email"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Email
+            <input
+              onChange={handleInputChange}
+              type="email"
+              name="email"
+              id="email"
+              className="font-normal border rounded py-2 px-3 w-full focus:outline-none focus:shadow-outline mt-1"
+              placeholder="Enter your email"
             />
           </label>
 
@@ -67,7 +111,7 @@ function SignUp() {
           </label>
 
           <button
-            onClick={(e) => registerUser(e)}
+            onClick={(e) => checkUserForm(e)}
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
           >
