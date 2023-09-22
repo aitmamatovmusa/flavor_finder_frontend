@@ -1,6 +1,6 @@
 const paths = {
   home: '/',
-  register: '/register',
+  signUp: '/signup',
 };
 
 export { paths };

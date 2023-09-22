@@ -1,4 +1,4 @@
-function Registration() {
+function SignUp() {
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3">
@@ -47,13 +47,13 @@ function Registration() {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
           >
-            Register
+            Sign Up
           </button>
         </form>
         <div className="mt-4 text-center">
           <p>Already have an account?</p>
           <button type="button" className="text-blue-500">
-            Login
+            Sign In
           </button>
         </div>
       </div>
@@ -61,4 +61,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default SignUp;
