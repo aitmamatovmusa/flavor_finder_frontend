@@ -39,6 +39,12 @@ Follow these steps to get started with Flavor Finder:
    npm install
    ```
 
+3. **Environment variables:**
+    Create an `.env` file in the root of the project and provide the following information:
+   ```
+   VITE_APP_BASE_URL=http://127.0.0.1:8000/
+   ```
+
 3. **Run the development server:**
    ```bash
    npm run dev
