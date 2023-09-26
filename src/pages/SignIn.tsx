@@ -2,13 +2,13 @@ import { MouseEvent, ChangeEvent, useState } from 'react';
 import { httpClient } from '../api/client';
 
 interface UserForm {
-  email: string;
+  username: string;
   password: string;
 }
 
 function SignIn() {
   const [signInForm, setSignInForm] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -23,9 +23,9 @@ function SignIn() {
   function checkUserForm(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    const { password, email } = signInForm;
-    if (password.trim() && email.trim()) {
-      const userForm = { password, email };
+    const { password, username } = signInForm;
+    if (password.trim() && username.trim()) {
+      const userForm = { password, username };
       loginUser(userForm);
     }
   }
@@ -41,17 +41,17 @@ function SignIn() {
         <h1 className="text-2xl mb-4 text-center">Login</h1>
         <form className="space-y-4">
           <label
-            htmlFor="email"
+            htmlFor="username"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            Email
+            Username
             <input
               onChange={handleInputChange}
-              type="email"
-              name="email"
-              id="email"
+              type="text"
+              id="username"
+              name="username"
               className="font-normal border rounded py-2 px-3 w-full focus:outline-none focus:shadow-outline mt-1"
-              placeholder="Enter your email"
+              placeholder="Enter your username"
             />
           </label>
 
