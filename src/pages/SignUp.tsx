@@ -1,5 +1,7 @@
 import { MouseEvent, ChangeEvent, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { httpClient } from '../api/client';
+import { paths } from '../router';
 
 interface UserForm {
   username: string;
@@ -8,6 +10,7 @@ interface UserForm {
 }
 
 function SignUp() {
+  const navigate = useNavigate();
   const [signUpForm, setSignUpForm] = useState({
     username: '',
     password: '',
@@ -18,6 +21,7 @@ function SignUp() {
   async function registerUser(userForm: UserForm) {
     try {
       await httpClient.post('/register/', userForm);
+      navigate(paths.signIn);
     } catch {
       throw new Error('Registration error');
     }
@@ -120,9 +124,9 @@ function SignUp() {
         </form>
         <div className="mt-4 text-center">
           <p>Already have an account?</p>
-          <button type="button" className="text-blue-500">
+          <Link to={paths.signIn} className="text-blue-500">
             Sign In
-          </button>
+          </Link>
         </div>
       </div>
     </div>
